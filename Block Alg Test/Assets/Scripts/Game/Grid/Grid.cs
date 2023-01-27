@@ -172,6 +172,9 @@ public class Grid : MonoBehaviour
         if (completedLines > 2) {
 
         }
+
+        var totalScores = 10 * completedLines;
+        GameEvents.AddScores(totalScores);
     }
 
     private int CheckIfSquaresAreCompleted(List<int[]> data)
