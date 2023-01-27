@@ -65,6 +65,7 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
                 square?.GetComponent<ShapeSquare>().DeactivateShape();
             }
         }
+
         _shapeActive = false;
     }
 

@@ -7,7 +7,16 @@ public class ShapeStorage : MonoBehaviour
     public List<ShapeData> shapeData;
     public List<Shape> shapeList;
 
-    // Start is called before the first frame update
+    private void OnEnable()
+    {
+        GameEvents.RequestNewShapes += RequestNewShapes;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.RequestNewShapes -= RequestNewShapes;
+    }
+
     void Start()
     {
         foreach (var shape in shapeList)
@@ -27,5 +36,13 @@ public class ShapeStorage : MonoBehaviour
 
         Debug.LogError("There is no shape selected");
         return null;
+    }
+
+    private void RequestNewShapes()
+    {
+        foreach (var shape in shapeList) {
+            var shapeIndex = UnityEngine.Random.Range(0, shapeData.Count);
+            shape.RequestNewShape(shapeData[shapeIndex]);
+        }
     }
 }

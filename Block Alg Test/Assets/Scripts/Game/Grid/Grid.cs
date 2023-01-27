@@ -95,7 +95,7 @@ public class Grid : MonoBehaviour
     }
 
     private void CheckIfShapeCanBePlaced()
-    {
+    {    
         var squareIndexes = new List<int>();
 
         foreach (var square in _gridSquares) {
@@ -105,7 +105,7 @@ public class Grid : MonoBehaviour
             {
                 squareIndexes.Add(gridSquare.SquareIndex);
                 gridSquare.Selected = false;
-                gridSquare.ActivateSquare();
+                //gridSquare.ActivateSquare();
             }
         }
 
@@ -117,12 +117,25 @@ public class Grid : MonoBehaviour
 
         if (currentSelectedShape.TotalSquareNumber == squareIndexes.Count)
         {
+            
             foreach (var squareIndex in squareIndexes)
             {
                 _gridSquares[squareIndex].GetComponent<GridSquare>().PlaceShapeOnBoard();
             }
 
+            var shapeLeft = 0;
+
+            foreach (var shape in shapeStorage.shapeList) {
+                if (shape.IsOnStartPosition() && shape.IsAnyOfShapeSqaureActive()) {
+                    shapeLeft++;
+                }
+            }
+
             currentSelectedShape.DeactivateShape();
+
+            if (shapeLeft == 0) {
+                GameEvents.RequestNewShapes();
+            }
         }
         else
         {
