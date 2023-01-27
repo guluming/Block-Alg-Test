@@ -534,13 +534,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca381cd108ba417abf4f5cd08554d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeStorage: {fileID: 726592072}
+  shapeStorage: {fileID: 0}
   columns: 9
   rows: 9
   squaresGap: 3
   gridSquare: {fileID: 7841732357911365219, guid: ea6ed23b6bde7432fa7c8c1aba40ad69, type: 3}
   startPosition: {x: -435, y: 442}
-  squardScale: 0.9
+  squareScale: 0.9
   everySquareOffset: 0.5
 --- !u!1001 &1392130484
 PrefabInstance:

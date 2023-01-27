@@ -96,38 +96,37 @@ public class Grid : MonoBehaviour
 
     private void CheckIfShapeCanBePlaced()
     {
-        //var squareIndexes = new List<int>();
+        var squareIndexes = new List<int>();
 
         foreach (var square in _gridSquares) {
             var gridSquare = square.GetComponent<GridSquare>();
 
-            if (gridSquare.CanWeUseThisSquare() == true) {
+            if (gridSquare.Selected && !gridSquare.SquareOccupied)
+            {
+                squareIndexes.Add(gridSquare.SquareIndex);
+                gridSquare.Selected = false;
                 gridSquare.ActivateSquare();
             }
-
-            //if (gridSquare.Selected && !gridSquare.SquareOccupied) {
-            //    squareIndexes.Add(gridSquare.SquareIndex);
-            //    gridSquare.Selected = false;
-            //    gridSquare.ActivateSquare();
-            //}
         }
 
-        //var currentSelectedShape = shapeStorage.GetCurrentSelectedShape();
-        //if (currentSelectedShape == null) {
-        //    return;
-        //}
+        var currentSelectedShape = shapeStorage.GetCurrentSelectedShape();
+        if (currentSelectedShape == null)
+        {
+            return;
+        }
 
-        //if (currentSelectedShape.TotalSquareNumber == squareIndexes.Count)
-        //{
-        //    foreach (var squareIndex in squareIndexes)
-        //    {
-        //        _gridSquares[squareIndex].GetComponent<GridSquare>().PlaceShapeOnBoard();
-        //    }
+        if (currentSelectedShape.TotalSquareNumber == squareIndexes.Count)
+        {
+            foreach (var squareIndex in squareIndexes)
+            {
+                _gridSquares[squareIndex].GetComponent<GridSquare>().PlaceShapeOnBoard();
+            }
 
-        //    currentSelectedShape.DeactivateShape();
-        //}
-        //else {
-        //    GameEvents.MoveShapeToStartPosition();
-        //}
+            currentSelectedShape.DeactivateShape();
+        }
+        else
+        {
+            GameEvents.MoveShapeToStartPosition();
+        }
     }
 }
