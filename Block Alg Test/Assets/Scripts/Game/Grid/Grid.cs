@@ -180,8 +180,8 @@ public class Grid : MonoBehaviour
 
         var completedLines = CheckIfSquaresAreCompleted(lines);
 
-        if (completedLines > 2) {
-
+        if (completedLines >= 2) {
+            GameEvents.ShowCongratulationWritings();
         }
 
         var totalScores = 10 * completedLines;
